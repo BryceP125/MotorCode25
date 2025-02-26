@@ -1,0 +1,29 @@
+#include <HardwareSerial.h>
+#include <PS4Controller.h>
+
+#define RXD2 16  // ESP32 RX pin (Connect to Mega TX)
+#define TXD2 17  // ESP32 TX pin (Connect to Mega RX)
+
+HardwareSerial mySerial(2);
+
+void setup() {
+    Serial.begin(115200);  // Debugging
+    mySerial.begin(115200, SERIAL_8N1, RXD2, TXD2);  // UART communication with Mega
+    PS4.begin("xx:xx:xx:xx:xx:xx"); // Replace with your PS4 controller MAC address
+    Serial.println("PS4 Controller Initialized");
+}
+
+void loop() {
+    if (PS4.isConnected()) {
+        int motor1 = map(PS4.LStickY(), -128, 127, -400, 400);
+        int motor2 = map(PS4.RStickY(), -128, 127, -400, 400);
+        int motor3 = map(PS4.LStickX(), -128, 127, -400, 400);
+        int motor4 = map(PS4.RStickX(), -128, 127, -400, 400);
+        
+        String data = "M1:" + String(motor1) + ",M2:" + String(motor2) + ",M3:" + String(motor3) + ",M4:" + String(motor4) + "\n";
+        mySerial.print(data);
+        
+        Serial.println(data);  // Debugging output
+        delay(100);
+    }
+}
