@@ -1,0 +1,15 @@
+void setup() {
+    Serial.begin(115200);  // USB Serial for debugging
+    Serial1.begin(115200); // Mega UART1 for ESP32 communication
+    Serial.println("Mega is ready!");
+}
+
+void loop() {
+    if (Serial1.available()) {
+        String receivedData = Serial1.readStringUntil('\n'); // Read data from ESP32
+        Serial.println("Received: " + receivedData); // Print to Serial Monitor
+    } else {
+        Serial.println("Waiting for data...");
+        delay(1000);
+    }
+}
