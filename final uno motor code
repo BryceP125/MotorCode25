@@ -3,21 +3,21 @@
 
 // Define the pins for ESC control (must be PWM-capable for the Servo library)
 #define M1_ESC_PIN 3
-#define M2_ESC_PIN 5
-#define M3_ESC_PIN 6
+#define M2_ESC_PIN 6
+#define M3_ESC_PIN 7
 #define M4_ESC_PIN 9
 
-// Define SoftwareSerial pins (change if needed)
-#define RX_PIN 10  // Receive pin (Uno RX, ESP32 TX)
-#define TX_PIN 11  // Transmit pin (Uno TX, ESP32 RX)
+// Change SoftwareSerial pins to 4 (RX) and 2 (TX)
+#define RX_PIN 4  // RX pin changed to 4
+#define TX_PIN 2  // TX pin changed to 2
 
-SoftwareSerial Serial1(RX_PIN, TX_PIN);  // SoftwareSerial to replace Serial1
+SoftwareSerial mySerial(RX_PIN, TX_PIN);  // Use SoftwareSerial on new pins
 
 Servo motor1, motor2, motor3, motor4;
 
 void setup() {
-  Serial.begin(115200);   // USB Serial for debugging
-  Serial1.begin(115200);  // High baud rate for ESP32 communication
+  Serial.begin(57600);   // Lower baud rate for debugging
+  mySerial.begin(57600); // Match baud rate with ESP32
 
   // Attach ESC control pins to Servo objects
   motor1.attach(M1_ESC_PIN);
@@ -37,8 +37,8 @@ void setup() {
 }
 
 void loop() {
-  if (Serial1.available()) {
-    String receivedData = Serial1.readStringUntil('\n');
+  if (mySerial.available()) {
+    String receivedData = mySerial.readStringUntil('\n');
     receivedData.trim();  // Remove any extra whitespace, CR, or LF characters
 
     // Debug: print raw data and its length
@@ -79,6 +79,6 @@ void loop() {
     }
   } else {
     Serial.println("Waiting for data...");
-    delay(100);
+    delay(100);  // Reduce frequency of processing
   }
 }
