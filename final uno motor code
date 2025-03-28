@@ -4,7 +4,7 @@
 // Define the pins for ESC control (must be PWM-capable for the Servo library)
 #define M1_ESC_PIN 3
 #define M2_ESC_PIN 6
-#define M3_ESC_PIN 7
+#define M3_ESC_PIN 8
 #define M4_ESC_PIN 9
 
 // Change SoftwareSerial pins to 4 (RX) and 2 (TX)
