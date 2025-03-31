@@ -1,8 +1,8 @@
 #include <HardwareSerial.h>
 #include <Bluepad32.h>
 
-#define RXD2 16  // ESP32 RX pin (Connect to Mega TX)
-#define TXD2 17  // ESP32 TX pin (Connect to Mega RX)
+#define RXD2 16  // ESP32 RX pin (Connect to Uno TX)
+#define TXD2 17  // ESP32 TX pin (Connect to Uno RX)
 
 HardwareSerial mySerial(2);
 ControllerPtr myControllers[BP32_MAX_GAMEPADS];
@@ -45,8 +45,8 @@ void processControllers() {
 }
 
 void setup() {
-    Serial.begin(115200);  // Debugging
-    mySerial.begin(115200, SERIAL_8N1, RXD2, TXD2);  // UART communication with Mega
+    Serial.begin(57600);  // Lower the baud rate for debugging
+    mySerial.begin(57600, SERIAL_8N1, RXD2, TXD2);  // Match baud rate with Uno
     BP32.setup(&onConnectedController, &onDisconnectedController);
     BP32.forgetBluetoothKeys();
     BP32.enableVirtualDevice(false);
@@ -57,5 +57,5 @@ void loop() {
     if (dataUpdated) {
         processControllers();
     }
-    delay(100);
+    delay(100);  // Lower the frequency of data updates
 }
