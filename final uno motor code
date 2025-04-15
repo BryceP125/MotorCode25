@@ -2,14 +2,14 @@
 #include <SoftwareSerial.h>
 
 // Define the pins for ESC control (must be PWM-capable for the Servo library)
-#define M1_ESC_PIN 3
-#define M2_ESC_PIN 6
+#define M1_ESC_PIN 5
+#define M2_ESC_PIN 7
 #define M3_ESC_PIN 8
 #define M4_ESC_PIN 9
 
-// Change SoftwareSerial pins to 4 (RX) and 2 (TX)
-#define RX_PIN 4  // RX pin changed to 4
-#define TX_PIN 2  // TX pin changed to 2
+// Change SoftwareSerial pins to 11 (RX) and 10 (TX)
+#define RX_PIN 11  // RX pin changed to 11
+#define TX_PIN 10  // TX pin changed to 10
 
 SoftwareSerial mySerial(RX_PIN, TX_PIN);  // Use SoftwareSerial on new pins
 
