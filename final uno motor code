@@ -2,9 +2,9 @@
 #include <SoftwareSerial.h>
 
 // Define the pins for ESC control (must be PWM-capable for the Servo library)
-#define M1_ESC_PIN 5
+#define M1_ESC_PIN 8
 #define M2_ESC_PIN 7
-#define M3_ESC_PIN 8
+#define M3_ESC_PIN 5
 #define M4_ESC_PIN 9
 
 // Change SoftwareSerial pins to 11 (RX) and 10 (TX)
@@ -55,8 +55,8 @@ void loop() {
       int s1 = map(m1, -400, 400, 1100, 1900);
       int s2 = map(m2, -400, 400, 1100, 1900);
       int s3 = map(m3, -400, 400, 1100, 1900);
-      int s4 = map(m4, -400, 400, 1100, 1900);
-
+      int s4 = map(-m3, -400, 400, 1100, 1900);
+      
       // Send the mapped signals to each ESC
       motor1.writeMicroseconds(s1);
       motor2.writeMicroseconds(s2);
