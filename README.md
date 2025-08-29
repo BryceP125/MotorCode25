@@ -1,1 +1,1 @@
-This code allows you to communicate with a esp32 module via bluetooth controller. It then sends serial down to an arduino uno or arduino mega allowing 4 BlueRobotics basic esc to opperate with 4 blue robotics T200's
+This code allows you to communicate with a esp32 module via bluetooth controller. It communicates serial down to an arduino uno or arduino mega allowing 4 BlueRobotics basic esc to opperate with 4 blue robotics T200's
